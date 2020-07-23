@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous">
+
+    </script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        $(document).ready(function () {
+
+            $('#run').on('click',function () {
+                var code=$('#code').val()
+                code=JSON.stringify(code)
+                $.ajax({
+                    url:'http://127.0.0.1:8000/api',
+                    type:'POST',
+                    data:{'code':code},
+                    success:function (data) {
+                        $('#output').html(data.output)
+                    }
+                })
+            })
+        });
+    </script>
+</head>
+<body>
+<textarea class="form-control rounded-0" id="code" rows="10" style="margin: 0px 69px 0px 0px; height: 579px; width: 441px;"></textarea>
+<input type="button" id="run" value="run">
+<textarea class="form-control rounded-0" id="output" rows="10" style="margin: 0px 69px 0px 0px; height: 271px; width: 268px;"></textarea>
+<div id="qhere"></div>
+</body>
+</html>
